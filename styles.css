@@ -163,6 +163,12 @@ main { width: min(100% - 40px, 820px); margin: 50px auto 56px; }
 .option[aria-selected="true"] .option-check { border-color: var(--blue); background: var(--blue); }
 .empty-option { padding: 18px 12px; color: var(--muted); text-align: center; font-size: 0.84rem; }
 
+#factory-options { max-height: none; overflow: hidden; padding-bottom: 0; }
+.options-list { max-height: 220px; overflow-y: auto; }
+.options-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 6px -6px 0; border-top: 1px solid var(--line); padding: 9px 12px; color: var(--muted); background: #f8fafc; font-size: 0.74rem; }
+.done-button { border: 0; border-radius: 7px; padding: 7px 18px; color: #fff; background: var(--navy); font-size: 0.78rem; font-weight: 750; }
+.done-button:hover, .done-button:focus-visible { background: #00467d; outline: 2px solid rgba(0, 169, 224, 0.3); outline-offset: 2px; }
+
 .selected-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
 .chip { display: inline-flex; max-width: 100%; align-items: center; gap: 7px; border: 1px solid #c9eaf6; border-radius: 999px; padding: 6px 7px 6px 10px; color: var(--navy); background: var(--blue-soft); font-size: 0.76rem; font-weight: 650; }
 .chip span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

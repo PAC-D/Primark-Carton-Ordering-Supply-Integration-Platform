@@ -103,12 +103,17 @@
     if (!state.supplier) return;
     const matches = state.supplier.factories.filter((factory) => includesQuery(factory, query));
 
+    const list = document.createElement("div");
+    list.className = "options-list";
+    list.role = "listbox";
+    list.setAttribute("aria-label", "Assigned factories");
+    list.setAttribute("aria-multiselectable", "true");
+
     if (!matches.length) {
       const empty = document.createElement("div");
       empty.className = "empty-option";
       empty.textContent = "No assigned factories found";
-      factoryPanel.append(empty);
-      return;
+      list.append(empty);
     }
 
     matches.forEach((factory) => {
@@ -117,6 +122,7 @@
       button.type = "button";
       button.className = "option";
       button.role = "option";
+      button.dataset.factoryCode = factory.code;
       button.setAttribute("aria-selected", String(selected));
       const checkbox = document.createElement("span");
       checkbox.className = "option-check";
@@ -127,17 +133,37 @@
       code.textContent = `Factory code: ${factory.code}`;
       text.append(code);
       button.append(checkbox, text);
-      button.addEventListener("click", () => toggleFactory(factory));
-      factoryPanel.append(button);
+      button.addEventListener("click", () => toggleFactory(factory, button));
+      list.append(button);
     });
+
+    const actions = document.createElement("div");
+    actions.className = "options-actions";
+    const summary = document.createElement("span");
+    const selectedCount = state.selectedFactories.size;
+    summary.textContent = `${selectedCount} ${selectedCount === 1 ? "factory" : "factories"} selected`;
+    const done = document.createElement("button");
+    done.type = "button";
+    done.className = "done-button";
+    done.textContent = "Done";
+    done.addEventListener("click", () => {
+      factoryInput.value = "";
+      setPanel(factoryInput, factoryPanel, false);
+      document.querySelector("#full-name").focus();
+    });
+    actions.append(summary, done);
+    factoryPanel.append(list, actions);
   }
 
-  function toggleFactory(factory) {
+  function toggleFactory(factory, sourceButton) {
     if (state.selectedFactories.has(factory.code)) state.selectedFactories.delete(factory.code);
     else state.selectedFactories.set(factory.code, factory);
     clearError("factory");
     renderFactories(factoryInput.value);
     renderChips();
+    if (sourceButton) {
+      factoryPanel.querySelector(`[data-factory-code="${factory.code}"]`)?.focus();
+    }
   }
 
   function renderChips() {
@@ -260,6 +286,7 @@
   factoryInput.addEventListener("focus", () => { renderFactories(factoryInput.value); setPanel(factoryInput, factoryPanel, true); });
   factoryInput.addEventListener("input", () => { renderFactories(factoryInput.value); setPanel(factoryInput, factoryPanel, true); });
   factoryInput.addEventListener("keydown", (event) => { if (event.key === "Escape") setPanel(factoryInput, factoryPanel, false); });
+  factoryControl.addEventListener("click", (event) => event.stopPropagation());
 
   document.addEventListener("click", (event) => {
     if (!event.target.closest("#supplier-combobox")) setPanel(supplierInput, supplierPanel, false);
