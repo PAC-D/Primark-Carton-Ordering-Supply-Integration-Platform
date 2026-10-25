@@ -1,0 +1,1127 @@
+// Generated from assets/factory-supplier pair.xlsx. Do not edit manually.
+window.SUPPLIER_FACTORY_DATA = [
+    {
+        "code":  "68740",
+        "name":  "ABA FASHIONS LTD",
+        "factories":  [
+                          {
+                              "code":  "24374",
+                              "name":  "ABA Fashion Limited"
+                          }
+                      ]
+    },
+    {
+        "code":  "83756",
+        "name":  "AKH APPARELS LIMITED",
+        "factories":  [
+                          {
+                              "code":  "15391",
+                              "name":  "AKH Apparels Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "67912",
+        "name":  "AR-TEX COMPOSITE LTD",
+        "factories":  [
+                          {
+                              "code":  "26451",
+                              "name":  "AR Tex Composite Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "83956",
+        "name":  "AYKROYD \u0026 SONS LTD",
+        "factories":  [
+                          {
+                              "code":  "14482",
+                              "name":  "AST Knitwear Ltd PJT"
+                          },
+                          {
+                              "code":  "11277",
+                              "name":  "Modele De Capital Ind Ltd PJT"
+                          },
+                          {
+                              "code":  "24442",
+                              "name":  "Tropical Knitex Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "84016",
+        "name":  "BIOWORLD INTERNATIONAL LTD FOB",
+        "factories":  [
+                          {
+                              "code":  "11277",
+                              "name":  "Modele De Capital Ind Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "72380",
+        "name":  "BRAND ALLIANCE INTERNATIONAL LIMITED",
+        "factories":  [
+                          {
+                              "code":  "11277",
+                              "name":  "Modele De Capital Ind Ltd PJT"
+                          },
+                          {
+                              "code":  "24442",
+                              "name":  "Tropical Knitex Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "83343",
+        "name":  "BRAVADO FAR EAST",
+        "factories":  [
+                          {
+                              "code":  "11583",
+                              "name":  "Echotex Ltd PJT"
+                          },
+                          {
+                              "code":  "18938",
+                              "name":  "Impress Newtex Composite Textile Ltd PJT"
+                          },
+                          {
+                              "code":  "14512",
+                              "name":  "Newage Apparels Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "65163",
+        "name":  "CALISTOGA TRADING FZE",
+        "factories":  [
+                          {
+                              "code":  "20421",
+                              "name":  "Ananta Huaxiang Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "61116",
+        "name":  "CARMEL CLOTHING EUROPE LTD",
+        "factories":  [
+                          {
+                              "code":  "27725",
+                              "name":  "Ananta Casual Wear Ltd"
+                          },
+                          {
+                              "code":  "26055",
+                              "name":  "Bravo Apparel Manufacturer Ltd"
+                          },
+                          {
+                              "code":  "25218",
+                              "name":  "Fortis Garments Limited"
+                          },
+                          {
+                              "code":  "21750",
+                              "name":  "Glory Fashion Wear Ltd"
+                          },
+                          {
+                              "code":  "22846",
+                              "name":  "Mohammadi Group Limited"
+                          },
+                          {
+                              "code":  "26764",
+                              "name":  "Oxford Shirts Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "53438",
+        "name":  "CASTLECRAFTS LIMITED T/A DEWHIRST",
+        "factories":  [
+                          {
+                              "code":  "24450",
+                              "name":  "Bando Eco Apparels Ltd"
+                          },
+                          {
+                              "code":  "22933",
+                              "name":  "Shanta Denims Limited"
+                          },
+                          {
+                              "code":  "19336",
+                              "name":  "Universal Menswear Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "84177",
+        "name":  "CENTRO INTERNATIONAL SOURCING LTD",
+        "factories":  [
+                          {
+                              "code":  "26018",
+                              "name":  "APS Apparels Limited"
+                          },
+                          {
+                              "code":  "24447",
+                              "name":  "Colors \u0026 Stitches Limited"
+                          },
+                          {
+                              "code":  "24448",
+                              "name":  "Comfit Composite Knit Ltd PKA Comfit Lingerie Limi"
+                          },
+                          {
+                              "code":  "26150",
+                              "name":  "Cotton Clothing BD Ltd"
+                          },
+                          {
+                              "code":  "20147",
+                              "name":  "Habitus Fashion Ltd"
+                          },
+                          {
+                              "code":  "20159",
+                              "name":  "Needle Drop Ltd"
+                          },
+                          {
+                              "code":  "18983",
+                              "name":  "Neo Fashion Ltd"
+                          },
+                          {
+                              "code":  "18926",
+                              "name":  "Surma Garments Ltd PJT"
+                          },
+                          {
+                              "code":  "24442",
+                              "name":  "Tropical Knitex Ltd"
+                          },
+                          {
+                              "code":  "26293",
+                              "name":  "Victoria Intimate Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "76707",
+        "name":  "CEREMONY OF ROSES FOB",
+        "factories":  [
+                          {
+                              "code":  "14512",
+                              "name":  "Newage Apparels Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "54552",
+        "name":  "COMPAGNIE MAURICIENNE DE TEXTILE",
+        "factories":  [
+                          {
+                              "code":  "23676",
+                              "name":  "Consumer Knitex Limited Unit 2"
+                          },
+                          {
+                              "code":  "23673",
+                              "name":  "Consumer Knitex Ltd CKL"
+                          }
+                      ]
+    },
+    {
+        "code":  "83001",
+        "name":  "ECHO SOURCING LTD ROW",
+        "factories":  [
+                          {
+                              "code":  "26559",
+                              "name":  "Echoknits Ltd"
+                          },
+                          {
+                              "code":  "11583",
+                              "name":  "Echotex Ltd PJT"
+                          },
+                          {
+                              "code":  "11584",
+                              "name":  "Far East Knitting \u0026 Dyeing Industries Ltd PJT (115"
+                          },
+                          {
+                              "code":  "17443",
+                              "name":  "Masco Cotton Ltd"
+                          },
+                          {
+                              "code":  "11277",
+                              "name":  "Modele De Capital Ind Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "83468",
+        "name":  "FAKIR APPARELS LTD",
+        "factories":  [
+                          {
+                              "code":  "11266",
+                              "name":  "Fakir Apparels Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "80074",
+        "name":  "FAKIR KNITWEARS LTD",
+        "factories":  [
+                          {
+                              "code":  "14100",
+                              "name":  "Fakir Knitwears Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "73968",
+        "name":  "FANATICS (INTERNATIONAL) LIMITED",
+        "factories":  [
+                          {
+                              "code":  "17443",
+                              "name":  "Masco Cotton Ltd"
+                          },
+                          {
+                              "code":  "11277",
+                              "name":  "Modele De Capital Ind Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "80539",
+        "name":  "FASHION ACCESSORIZE INDUSTRY LIMITED",
+        "factories":  [
+                          {
+                              "code":  "27410",
+                              "name":  "Good Bags And Accessories Limited"
+                          }
+                      ]
+    },
+    {
+        "code":  "84081",
+        "name":  "FASHION UK ROW",
+        "factories":  [
+                          {
+                              "code":  "11583",
+                              "name":  "Echotex Ltd PJT"
+                          },
+                          {
+                              "code":  "11277",
+                              "name":  "Modele De Capital Ind Ltd PJT"
+                          },
+                          {
+                              "code":  "18469",
+                              "name":  "Novel Hurricane Knit Garments Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "80044",
+        "name":  "FOOK HING INDUSTRIAL LIMITED",
+        "factories":  [
+                          {
+                              "code":  "23445",
+                              "name":  "Rose Intimates Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "73975",
+        "name":  "GLOBAL MERCHANDISING SERVICES LIMITED",
+        "factories":  [
+                          {
+                              "code":  "17443",
+                              "name":  "Masco Cotton Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "67604",
+        "name":  "GOUMATI KNITWEARS LIMITED",
+        "factories":  [
+                          {
+                              "code":  "15735",
+                              "name":  "Goumati Knitwear PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "59544",
+        "name":  "HAPPY PUNT S.L.U.",
+        "factories":  [
+                          {
+                              "code":  "26451",
+                              "name":  "AR Tex Composite Ltd"
+                          },
+                          {
+                              "code":  "26005",
+                              "name":  "Brothers Fashion LTD"
+                          },
+                          {
+                              "code":  "11266",
+                              "name":  "Fakir Apparels Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "80083",
+        "name":  "HOP LUN (H.K.) LTD.",
+        "factories":  [
+                          {
+                              "code":  "18001",
+                              "name":  "Hop Lun Apparel Limited PJT"
+                          },
+                          {
+                              "code":  "21164",
+                              "name":  "Hop Lun Apparel Ltd Unit 2 PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "80057",
+        "name":  "HTL FASHION HAZIR GIYIM SAN.TIC.LTD.STI",
+        "factories":  [
+                          {
+                              "code":  "27826",
+                              "name":  "Jin Hong Garments Ltd"
+                          },
+                          {
+                              "code":  "22933",
+                              "name":  "Shanta Denims Limited"
+                          },
+                          {
+                              "code":  "25086",
+                              "name":  "Well Lord Knit Wears Ltd"
+                          },
+                          {
+                              "code":  "20096",
+                              "name":  "Windy Apparels Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "83515",
+        "name":  "IBRAHIM KNIT GARMENT (PVT) LTD",
+        "factories":  [
+                          {
+                              "code":  "12048",
+                              "name":  "Ibrahim Knit Garments Pvt Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "65625",
+        "name":  "INDESORE TRADING LTD",
+        "factories":  [
+                          {
+                              "code":  "16401",
+                              "name":  "Noman Terry Towel Mills Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "80068",
+        "name":  "JIANGSU GUOTAI HUASHENG INDUSTRIAL CO LTD",
+        "factories":  [
+                          {
+                              "code":  "18757",
+                              "name":  "Chorka Textile Limited PJT"
+                          },
+                          {
+                              "code":  "24407",
+                              "name":  "Faiza Industries Ltd"
+                          },
+                          {
+                              "code":  "23926",
+                              "name":  "Southeast Sweaters Limited PJT"
+                          },
+                          {
+                              "code":  "23925",
+                              "name":  "Target Denim \u0026 Casual Wear Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "80734",
+        "name":  "KAIXI FASHION (HK) CO.LTD",
+        "factories":  [
+                          {
+                              "code":  "26163",
+                              "name":  "Kaixi Fashion Bangladesh Co Ltd"
+                          },
+                          {
+                              "code":  "27618",
+                              "name":  "Kaixi Lingerie Bangladesh Co Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "80486",
+        "name":  "MASTERTEC INTERNATIONAL LTD",
+        "factories":  [
+                          {
+                              "code":  "24718",
+                              "name":  "AB Apparels Ltd"
+                          },
+                          {
+                              "code":  "24634",
+                              "name":  "Azmat Apparels Ltd"
+                          },
+                          {
+                              "code":  "24407",
+                              "name":  "Faiza Industries Ltd"
+                          },
+                          {
+                              "code":  "25438",
+                              "name":  "Onus Design Ltd PKA Onus Garments Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "64951",
+        "name":  "MERCH TRAFFIC LTD",
+        "factories":  [
+                          {
+                              "code":  "11583",
+                              "name":  "Echotex Ltd PJT"
+                          },
+                          {
+                              "code":  "14512",
+                              "name":  "Newage Apparels Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "81107",
+        "name":  "MODELE DE CAPITAL IND. LTD",
+        "factories":  [
+                          {
+                              "code":  "26088",
+                              "name":  "Modele De Capital Ind Ltd (Unit 2)"
+                          },
+                          {
+                              "code":  "11277",
+                              "name":  "Modele De Capital Ind Ltd PJT"
+                          },
+                          {
+                              "code":  "24777",
+                              "name":  "Sadia Fashion Wears Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "80172",
+        "name":  "MOHAMMADI BUYING SERVICES LTD.",
+        "factories":  [
+                          {
+                              "code":  "22846",
+                              "name":  "Mohammadi Group Limited"
+                          }
+                      ]
+    },
+    {
+        "code":  "80195",
+        "name":  "N.R. KNITTING MILLS LTD",
+        "factories":  [
+                          {
+                              "code":  "10077",
+                              "name":  "NR Knitting Mills Limited PJT"
+                          },
+                          {
+                              "code":  "10900",
+                              "name":  "Rahimaaziz Knitspin Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "84257",
+        "name":  "NOIZE JEANS",
+        "factories":  [
+                          {
+                              "code":  "24040",
+                              "name":  "Aspire Garments Ltd PJT"
+                          },
+                          {
+                              "code":  "23908",
+                              "name":  "Denim Asia Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "66747",
+        "name":  "NOMAN TERRY TOWEL MILLS LTD",
+        "factories":  [
+                          {
+                              "code":  "16401",
+                              "name":  "Noman Terry Towel Mills Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "83804",
+        "name":  "NOVEL HURRICANE KNIT GARMENTS LTD",
+        "factories":  [
+                          {
+                              "code":  "14482",
+                              "name":  "AST Knitwear Ltd PJT"
+                          },
+                          {
+                              "code":  "18469",
+                              "name":  "Novel Hurricane Knit Garments Ltd PJT"
+                          },
+                          {
+                              "code":  "25086",
+                              "name":  "Well Lord Knit Wears Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "66025",
+        "name":  "NRG KNIT COMPOSITE",
+        "factories":  [
+                          {
+                              "code":  "25278",
+                              "name":  "NRG Knit Composite"
+                          }
+                      ]
+    },
+    {
+        "code":  "61301",
+        "name":  "OUTERSTUFF EMEA LTD",
+        "factories":  [
+                          {
+                              "code":  "11583",
+                              "name":  "Echotex Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "83760",
+        "name":  "PADMA TEXTILES LTD",
+        "factories":  [
+                          {
+                              "code":  "26387",
+                              "name":  "Alfa Patterns BD Ltd"
+                          },
+                          {
+                              "code":  "24040",
+                              "name":  "Aspire Garments Ltd PJT"
+                          },
+                          {
+                              "code":  "27649",
+                              "name":  "Colour And Co"
+                          },
+                          {
+                              "code":  "25218",
+                              "name":  "Fortis Garments Limited"
+                          },
+                          {
+                              "code":  "11277",
+                              "name":  "Modele De Capital Ind Ltd PJT"
+                          },
+                          {
+                              "code":  "14512",
+                              "name":  "Newage Apparels Ltd"
+                          },
+                          {
+                              "code":  "18234",
+                              "name":  "Saturn Textile Limited"
+                          },
+                          {
+                              "code":  "27035",
+                              "name":  "Southern Knitwear Limited"
+                          },
+                          {
+                              "code":  "20017",
+                              "name":  "Trouser Line Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "81813",
+        "name":  "PARKSCENE INDUSTRIAL LIMITED",
+        "factories":  [
+                          {
+                              "code":  "19683",
+                              "name":  "MB Knit Fashion PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "83810",
+        "name":  "PEARL GLOBAL (HK) LTD",
+        "factories":  [
+                          {
+                              "code":  "19424",
+                              "name":  "International Classic Composite Ltd"
+                          },
+                          {
+                              "code":  "18750",
+                              "name":  "Norp Knit Industries Limited Unit 1 PJT"
+                          },
+                          {
+                              "code":  "14059",
+                              "name":  "Norp Knit Industries Unit 2"
+                          },
+                          {
+                              "code":  "25696",
+                              "name":  "Prudent Fashions Ltd"
+                          },
+                          {
+                              "code":  "17803",
+                              "name":  "Scarlet Knitwears Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "83942",
+        "name":  "PENTEX LIMITED - ROW",
+        "factories":  [
+                          {
+                              "code":  "19151",
+                              "name":  "Hasan Tanvir Fashion Wears Ltd PJT"
+                          },
+                          {
+                              "code":  "26569",
+                              "name":  "Lesquire Limited"
+                          },
+                          {
+                              "code":  "23609",
+                              "name":  "Mehnaz Styles \u0026 Craft Ltd"
+                          },
+                          {
+                              "code":  "20227",
+                              "name":  "Mouchak Knit Composite Ltd PJT"
+                          },
+                          {
+                              "code":  "25905",
+                              "name":  "New Mehnaz Styles And Crafts Limited"
+                          }
+                      ]
+    },
+    {
+        "code":  "52745",
+        "name":  "POETIC BRANDS",
+        "factories":  [
+                          {
+                              "code":  "17443",
+                              "name":  "Masco Cotton Ltd"
+                          },
+                          {
+                              "code":  "20017",
+                              "name":  "Trouser Line Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "66440",
+        "name":  "POETICGEM INTERNATIONAL FZCO",
+        "factories":  [
+                          {
+                              "code":  "24272",
+                              "name":  "Crown Exclusive Wears Ltd"
+                          },
+                          {
+                              "code":  "24650",
+                              "name":  "GoodEarth Apparels Ltd"
+                          },
+                          {
+                              "code":  "19424",
+                              "name":  "International Classic Composite Ltd"
+                          },
+                          {
+                              "code":  "25236",
+                              "name":  "K C Bottom \u0026 Shirt Wear Company"
+                          },
+                          {
+                              "code":  "23385",
+                              "name":  "Lyric Industries Pvt Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "73768",
+        "name":  "Q COLLECTION PTE LTD",
+        "factories":  [
+                          {
+                              "code":  "27586",
+                              "name":  "Styrax Fashions Ltd Plot 180"
+                          }
+                      ]
+    },
+    {
+        "code":  "73353",
+        "name":  "RAW GROUP GLOBAL SOURCING LIMITED",
+        "factories":  [
+                          {
+                              "code":  "19394",
+                              "name":  "Coast to Coast Pvt Ltd PJT"
+                          },
+                          {
+                              "code":  "27650",
+                              "name":  "Urmi Garments Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "83393",
+        "name":  "RHEA HK LIMITED",
+        "factories":  [
+                          {
+                              "code":  "20614",
+                              "name":  "L Usine Fashions Channapara PJT"
+                          },
+                          {
+                              "code":  "14542",
+                              "name":  "Target Fine Wear Industries PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "56331",
+        "name":  "SBS TEKSTIL SANAYI VE TICARET AS",
+        "factories":  [
+                          {
+                              "code":  "15391",
+                              "name":  "AKH Apparels Ltd PJT"
+                          },
+                          {
+                              "code":  "20979",
+                              "name":  "AKH Eco Apparels Ltd PJT"
+                          },
+                          {
+                              "code":  "26055",
+                              "name":  "Bravo Apparel Manufacturer Ltd"
+                          },
+                          {
+                              "code":  "15187",
+                              "name":  "Selina Apparels"
+                          }
+                      ]
+    },
+    {
+        "code":  "83489",
+        "name":  "SELINA APPARELS LTD",
+        "factories":  [
+                          {
+                              "code":  "15187",
+                              "name":  "Selina Apparels"
+                          }
+                      ]
+    },
+    {
+        "code":  "84230",
+        "name":  "SHANG HONG INTERNATIONAL HONG KONG LIMITED",
+        "factories":  [
+                          {
+                              "code":  "27826",
+                              "name":  "Jin Hong Garments Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "83834",
+        "name":  "SHIN SHIN APPARELS LTD.",
+        "factories":  [
+                          {
+                              "code":  "20015",
+                              "name":  "Suad Garments Industries Ltd"
+                          },
+                          {
+                              "code":  "22806",
+                              "name":  "Vancot Limited PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "73151",
+        "name":  "SHOT CLOTHING LTD",
+        "factories":  [
+                          {
+                              "code":  "11583",
+                              "name":  "Echotex Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "64891",
+        "name":  "SHOWROOM 79 BV",
+        "factories":  [
+                          {
+                              "code":  "15187",
+                              "name":  "Selina Apparels"
+                          }
+                      ]
+    },
+    {
+        "code":  "54579",
+        "name":  "SILK ROUTE SOURCING LIMITED",
+        "factories":  [
+                          {
+                              "code":  "22257",
+                              "name":  "Panasia Clothing Ltd PJT"
+                          },
+                          {
+                              "code":  "17830",
+                              "name":  "Tarasima Apparels Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "80306",
+        "name":  "SIMPLE APPROACH LIMTED",
+        "factories":  [
+                          {
+                              "code":  "11121",
+                              "name":  "ATS Apparels Ltd"
+                          },
+                          {
+                              "code":  "28381",
+                              "name":  "Chorka Apparels Limited"
+                          },
+                          {
+                              "code":  "25787",
+                              "name":  "GM Apparels Ltd"
+                          },
+                          {
+                              "code":  "23489",
+                              "name":  "Golden Refit Garments Ltd"
+                          },
+                          {
+                              "code":  "24650",
+                              "name":  "GoodEarth Apparels Ltd"
+                          },
+                          {
+                              "code":  "25406",
+                              "name":  "KC Jacket Wear Company"
+                          },
+                          {
+                              "code":  "13809",
+                              "name":  "Libas Textiles Ltd"
+                          },
+                          {
+                              "code":  "26306",
+                              "name":  "Magic Works"
+                          },
+                          {
+                              "code":  "15379",
+                              "name":  "Mahdeen Sweater Ltd"
+                          },
+                          {
+                              "code":  "25399",
+                              "name":  "Progress Apparels Bangladesh Ltd"
+                          },
+                          {
+                              "code":  "17149",
+                              "name":  "SB Style Composite Ltd PJT"
+                          },
+                          {
+                              "code":  "23926",
+                              "name":  "Southeast Sweaters Limited PJT"
+                          },
+                          {
+                              "code":  "16534",
+                              "name":  "Southern Clothings Ltd PJT"
+                          },
+                          {
+                              "code":  "25990",
+                              "name":  "SQ Celsius LTD"
+                          },
+                          {
+                              "code":  "25547",
+                              "name":  "Time Sweaters Limited"
+                          },
+                          {
+                              "code":  "25968",
+                              "name":  "Triple Apparels Limited"
+                          },
+                          {
+                              "code":  "26695",
+                              "name":  "Winter Dress"
+                          },
+                          {
+                              "code":  "23378",
+                              "name":  "Yunusco BD Limited"
+                          }
+                      ]
+    },
+    {
+        "code":  "55790",
+        "name":  "SNQS GLOBAL TEXTILES FZE",
+        "factories":  [
+                          {
+                              "code":  "20331",
+                              "name":  "Alim Knit Ltd"
+                          },
+                          {
+                              "code":  "25042",
+                              "name":  "Fame Apparels Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "80282",
+        "name":  "SOORTY INTERNATIONAL LTD",
+        "factories":  [
+                          {
+                              "code":  "20079",
+                              "name":  "Soorty Textiles BD Limited PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "60354",
+        "name":  "SUBLIME GREENTEX LTD",
+        "factories":  [
+                          {
+                              "code":  "25133",
+                              "name":  "Sublime Greentex Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "59407",
+        "name":  "TEX INTERNATIONAL LTD",
+        "factories":  [
+                          {
+                              "code":  "26006",
+                              "name":  "Axis Knitwears Limited"
+                          },
+                          {
+                              "code":  "25383",
+                              "name":  "CA Knitwear Ltd"
+                          },
+                          {
+                              "code":  "18938",
+                              "name":  "Impress Newtex Composite Textile Ltd PJT"
+                          },
+                          {
+                              "code":  "26425",
+                              "name":  "Lantabur Apparels Ltd"
+                          },
+                          {
+                              "code":  "14279",
+                              "name":  "PN Composite"
+                          },
+                          {
+                              "code":  "17803",
+                              "name":  "Scarlet Knitwears Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "83967",
+        "name":  "TEXGROUP LTD",
+        "factories":  [
+                          {
+                              "code":  "20517",
+                              "name":  "Afiya Knitwear Ltd PJT"
+                          },
+                          {
+                              "code":  "22585",
+                              "name":  "Blue Planet Fashionwear Ltd"
+                          },
+                          {
+                              "code":  "23817",
+                              "name":  "Intimate Attire Ltd PJT"
+                          },
+                          {
+                              "code":  "22400",
+                              "name":  "Lida Textile \u0026 Dyeing Limited"
+                          },
+                          {
+                              "code":  "22846",
+                              "name":  "Mohammadi Group Limited"
+                          },
+                          {
+                              "code":  "27798",
+                              "name":  "NKM Fashion Limited"
+                          },
+                          {
+                              "code":  "21111",
+                              "name":  "Rizvi Fashions Limited PJT"
+                          },
+                          {
+                              "code":  "19681",
+                              "name":  "Romo Fashion Today Ltd PJT"
+                          },
+                          {
+                              "code":  "23445",
+                              "name":  "Rose Intimates Ltd PJT"
+                          },
+                          {
+                              "code":  "27586",
+                              "name":  "Styrax Fashions Ltd Plot 180"
+                          }
+                      ]
+    },
+    {
+        "code":  "80171",
+        "name":  "THE SHANIN CLOTHING LTD",
+        "factories":  [
+                          {
+                              "code":  "15173",
+                              "name":  "Reaz Export Apparels Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "80222",
+        "name":  "UF ACCESSORIES CO LTD",
+        "factories":  [
+                          {
+                              "code":  "27672",
+                              "name":  "Unifa Handbag And Belt (BD) Co Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "65863",
+        "name":  "WARNER MUSIC UK LTD",
+        "factories":  [
+                          {
+                              "code":  "11583",
+                              "name":  "Echotex Ltd PJT"
+                          }
+                      ]
+    },
+    {
+        "code":  "84130",
+        "name":  "WINDY APPARELS LTD",
+        "factories":  [
+                          {
+                              "code":  "20096",
+                              "name":  "Windy Apparels Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "68683",
+        "name":  "WONDERWALL (F.E) LTD",
+        "factories":  [
+                          {
+                              "code":  "26447",
+                              "name":  "Welldone Apparel Ltd"
+                          }
+                      ]
+    },
+    {
+        "code":  "83765",
+        "name":  "ZAMIRA FASHION LIMITED",
+        "factories":  [
+                          {
+                              "code":  "22775",
+                              "name":  "Dhaka Garments \u0026 Washing Ltd PKA HAMS Washing \u0026 Dy"
+                          }
+                      ]
+    },
+    {
+        "code":  "83998",
+        "name":  "ZXY INTERNATIONAL FZCO",
+        "factories":  [
+                          {
+                              "code":  "18763",
+                              "name":  "Everbright Sweater Ltd"
+                          },
+                          {
+                              "code":  "15378",
+                              "name":  "Helicon Ltd"
+                          },
+                          {
+                              "code":  "24250",
+                              "name":  "T Design Knitwear Limited"
+                          }
+                      ]
+    }
+];
