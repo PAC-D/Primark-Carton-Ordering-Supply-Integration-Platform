@@ -1,0 +1,230 @@
+:root {
+  --navy: #002b5c;
+  --navy-deep: #001f46;
+  --blue: #00a9e0;
+  --blue-soft: #eaf8fd;
+  --ink: #15243a;
+  --muted: #617086;
+  --line: #dbe3ed;
+  --surface: #ffffff;
+  --background: #f4f7fa;
+  --danger: #c92b36;
+  --success: #137a4c;
+  --shadow: 0 18px 55px rgba(0, 43, 92, 0.1);
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { min-width: 320px; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 15% 8%, rgba(0, 169, 224, 0.08), transparent 27rem),
+    linear-gradient(180deg, #fff 0, var(--background) 22rem);
+  min-height: 100vh;
+}
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+.site-header {
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid #e9eef4;
+}
+
+.header-inner {
+  width: min(100% - 40px, 1040px);
+  min-height: 94px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+}
+
+.brand { display: inline-flex; }
+.pacd-logo { display: block; width: 94px; height: auto; }
+.primark-logo { display: block; width: 112px; height: auto; }
+
+.title-block { border-left: 1px solid var(--line); padding-left: 24px; }
+.eyebrow, .step-label {
+  margin: 0 0 4px;
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 { margin: 0; color: var(--navy); font-size: clamp(1rem, 2.3vw, 1.28rem); line-height: 1.25; }
+
+main { width: min(100% - 40px, 820px); margin: 50px auto 56px; }
+
+.intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.intro h2 { margin: 0; color: var(--navy-deep); font-size: clamp(1.65rem, 5vw, 2.25rem); line-height: 1.15; }
+
+.registration-card {
+  position: relative;
+  overflow: visible;
+  padding: clamp(24px, 5vw, 42px);
+  background: var(--surface);
+  border: 1px solid #e4eaf1;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.registration-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  border-radius: 18px 18px 0 0;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+}
+
+.form-heading { display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
+.form-heading h3 { margin: 0 0 3px; color: var(--navy); font-size: 1.1rem; }
+.form-heading p { margin: 0; color: var(--muted); font-size: 0.83rem; }
+.form-icon { display: grid; place-items: center; width: 28px; height: 28px; }
+.form-icon svg { width: 23px; fill: none; stroke: var(--blue); stroke-width: 1.7; stroke-linecap: round; }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 23px 20px; }
+.field-full { grid-column: 1 / -1; }
+.field { min-width: 0; }
+.field label { display: inline-block; margin-bottom: 8px; color: var(--navy-deep); font-size: 0.84rem; font-weight: 750; }
+.field label span { color: var(--danger); }
+.field-note { margin: -3px 0 10px; color: var(--muted); font-size: 0.78rem; line-height: 1.45; }
+.label-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.selection-count { color: var(--blue); font-size: 0.76rem; font-weight: 700; }
+
+.field > input, .combo-control {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #cbd6e3;
+  border-radius: 9px;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.field > input { padding: 0 14px; color: var(--ink); outline: none; }
+.field > input::placeholder, .combo-control input::placeholder { color: #8b99ab; }
+.field > input:focus, .combo-control:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0, 169, 224, 0.12); }
+
+.combobox, .multi-select { position: relative; }
+.combo-control { display: flex; align-items: center; padding: 0 13px; }
+.combo-control > svg:first-child { flex: 0 0 19px; width: 19px; fill: #8291a4; }
+.combo-control input { min-width: 0; flex: 1; align-self: stretch; border: 0; padding: 0 10px; color: var(--ink); background: transparent; outline: 0; }
+.combo-control .chevron { flex: 0 0 18px; width: 18px; fill: #65758a; }
+.clear-button { width: 28px; border: 0; color: #68788d; background: transparent; font-size: 1.25rem; line-height: 1; }
+.is-disabled .combo-control { border-color: #e1e6ec; background: #f4f6f8; }
+.is-disabled .combo-control > * { opacity: 0.65; }
+
+.options-panel {
+  position: absolute;
+  z-index: 20;
+  inset: calc(100% + 7px) 0 auto;
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid #d4dee9;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 16px 34px rgba(0, 31, 70, 0.16);
+}
+
+.option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 7px;
+  padding: 10px;
+  color: var(--ink);
+  background: #fff;
+  text-align: left;
+  line-height: 1.35;
+}
+
+.option:hover, .option:focus-visible { background: #eff9fd; outline: 0; }
+.option small { display: block; margin-top: 2px; color: var(--muted); }
+.option-check { flex: 0 0 18px; display: grid; place-items: center; width: 18px; height: 18px; border: 1px solid #b7c5d5; border-radius: 4px; color: #fff; background: #fff; font-size: 0.75rem; }
+.option[aria-selected="true"] .option-check { border-color: var(--blue); background: var(--blue); }
+.empty-option { padding: 18px 12px; color: var(--muted); text-align: center; font-size: 0.84rem; }
+
+.selected-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+.chip { display: inline-flex; max-width: 100%; align-items: center; gap: 7px; border: 1px solid #c9eaf6; border-radius: 999px; padding: 6px 7px 6px 10px; color: var(--navy); background: var(--blue-soft); font-size: 0.76rem; font-weight: 650; }
+.chip span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chip button { flex: 0 0 21px; width: 21px; height: 21px; border: 0; border-radius: 50%; padding: 0; color: var(--navy); background: rgba(0, 43, 92, 0.08); line-height: 19px; }
+
+.divider { display: flex; align-items: center; gap: 12px; margin: 2px 0 -1px; color: #758499; font-size: 0.73rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.divider::before, .divider::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+
+.field-error { min-height: 17px; margin: 5px 2px 0; color: var(--danger); font-size: 0.72rem; }
+.has-error, .has-error .combo-control { border-color: var(--danger) !important; }
+
+.form-status { margin: 21px 0 0; border-radius: 9px; padding: 12px 14px; font-size: 0.84rem; line-height: 1.45; }
+.form-status.success { color: #0c613b; background: #e8f7ef; border: 1px solid #b8e5cb; }
+.form-status.error { color: #91212a; background: #fff0f1; border: 1px solid #f0c5c9; }
+
+.submit-button {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+  border: 0;
+  border-radius: 9px;
+  color: #fff;
+  background: linear-gradient(110deg, var(--navy) 0%, #005993 58%, var(--blue) 120%);
+  box-shadow: 0 8px 20px rgba(0, 43, 92, 0.2);
+  font-weight: 750;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+}
+.submit-button:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0, 43, 92, 0.26); }
+.submit-button:disabled { cursor: wait; opacity: 0.72; transform: none; }
+.submit-button svg { width: 19px; fill: currentColor; }
+.privacy-note { margin: 13px 0 0; color: var(--muted); text-align: center; font-size: 0.72rem; }
+
+footer { padding: 0 20px 28px; color: #718096; text-align: center; font-size: 0.73rem; }
+footer p { margin: 0; }
+.developer-credit { margin-top: 5px; color: #aeb8c5; font-size: 0.64rem; font-weight: 500; }
+.developer-credit a { color: #9da9b7; font-weight: 600; text-decoration: none; }
+.developer-credit a:hover, .developer-credit a:focus-visible { color: #7d8a9a; text-decoration: underline; }
+
+@media (max-width: 680px) {
+  .header-inner { width: min(100% - 28px, 1040px); min-height: 80px; grid-template-columns: auto 1fr; gap: 14px; }
+  .pacd-logo { width: 74px; }
+  .primark-logo { display: none; }
+  .title-block { padding-left: 14px; }
+  .eyebrow { display: none; }
+  main { width: min(100% - 24px, 820px); margin: 32px auto 40px; }
+  .intro { display: block; }
+  .registration-card { padding: 25px 18px; border-radius: 14px; }
+  .form-grid { grid-template-columns: 1fr; gap: 18px; }
+  .field-full, .divider { grid-column: 1; }
+  .options-panel { max-height: 220px; }
+}
+
+@media (max-width: 390px) {
+  h1 { font-size: 0.9rem; }
+  .pacd-logo { width: 62px; }
+  .title-block { padding-left: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}

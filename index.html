@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Register for the Primark Carton Ordering & Supply Integration Platform.">
+  <title>Registration | Primark Carton Ordering & Supply Integration Platform</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="PACD home">
+        <img class="pacd-logo" src="assets/pacd.png" alt="PACD">
+      </a>
+      <div class="title-block">
+        <p class="eyebrow">Supplier onboarding</p>
+        <h1>Primark Carton Ordering &amp; Supply Integration Platform</h1>
+      </div>
+      <img class="primark-logo" src="assets/primark-logo.png" alt="Primark">
+    </div>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="registration-heading">
+      <div>
+        <p class="step-label">Account registration</p>
+        <h2 id="registration-heading">Create your access request</h2>
+      </div>
+    </section>
+
+    <form id="registration-form" class="registration-card" novalidate>
+      <div class="form-heading">
+        <div class="form-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.25"/><path d="M5.75 20v-1.5A6.25 6.25 0 0 1 12 12.25a6.25 6.25 0 0 1 6.25 6.25V20"/></svg>
+        </div>
+        <div>
+          <h3>Registration details</h3>
+          <p>All fields are required.</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field field-full">
+          <label for="supplier-search">Supplier Name <span aria-hidden="true">*</span></label>
+          <div class="combobox" id="supplier-combobox">
+            <div class="combo-control">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 20-4.4-4.4a8 8 0 1 0-1.4 1.4l4.4 4.4L21 20ZM5 11a6 6 0 1 1 12 0 6 6 0 0 1-12 0Z"/></svg>
+              <input id="supplier-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="supplier-options" placeholder="Search and select a supplier" autocomplete="off" required>
+              <button class="clear-button" id="clear-supplier" type="button" aria-label="Clear supplier" hidden>&times;</button>
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9.5 5 5 5-5 1.5 1.5-6.5 6.5L5.5 11 7 9.5Z"/></svg>
+            </div>
+            <div id="supplier-options" class="options-panel" role="listbox" hidden></div>
+          </div>
+          <p class="field-error" id="supplier-error"></p>
+        </div>
+
+        <div class="field field-full">
+          <div class="label-row">
+            <label for="factory-search">Factory Name <span aria-hidden="true">*</span></label>
+            <span id="factory-count" class="selection-count" aria-live="polite"></span>
+          </div>
+          <p class="field-note">The registered user will only be able to work with the factories selected here.</p>
+          <div class="multi-select is-disabled" id="factory-multiselect">
+            <div class="combo-control">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 20-4.4-4.4a8 8 0 1 0-1.4 1.4l4.4 4.4L21 20ZM5 11a6 6 0 1 1 12 0 6 6 0 0 1-12 0Z"/></svg>
+              <input id="factory-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="factory-options" placeholder="Select a supplier first" autocomplete="off" disabled required>
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9.5 5 5 5-5 1.5 1.5-6.5 6.5L5.5 11 7 9.5Z"/></svg>
+            </div>
+            <div id="factory-options" class="options-panel" role="listbox" aria-multiselectable="true" hidden></div>
+            <div id="selected-factories" class="selected-chips"></div>
+          </div>
+          <p class="field-error" id="factory-error"></p>
+        </div>
+
+        <div class="divider field-full"><span>Your information</span></div>
+
+        <div class="field">
+          <label for="full-name">Name <span aria-hidden="true">*</span></label>
+          <input id="full-name" name="full_name" type="text" autocomplete="name" placeholder="Enter your full name" maxlength="120" required>
+          <p class="field-error" id="name-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="email">Email <span aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@company.com" maxlength="254" required>
+          <p class="field-error" id="email-error"></p>
+        </div>
+      </div>
+
+      <div id="form-status" class="form-status" role="status" aria-live="polite" hidden></div>
+
+      <button class="submit-button" type="submit">
+        <span>Submit registration</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13.5 5 7 7-7 7-1.4-1.4 4.6-4.6H3v-2h13.7l-4.6-4.6L13.5 5Z"/></svg>
+      </button>
+      <p class="privacy-note">By submitting, you confirm that the information provided is accurate.</p>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> PACD. Primark Carton Ordering &amp; Supply Integration Platform.</p>
+    <p class="developer-credit">Developed by <a href="https://github.com/recursid" target="_blank" rel="noopener noreferrer">RecurSID</a></p>
+  </footer>
+
+  <script src="data/supplier-factories.js"></script>
+  <script src="supabase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
