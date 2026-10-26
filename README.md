@@ -8,6 +8,7 @@ A responsive supplier registration portal for CartonConnect. It uses the PACD an
 - Supplier-dependent multi-select containing the assigned factories only
 - Required registration-type chooser for supplier or packaging supplier onboarding
 - Packaging supplier registration with a controlled single-select supplier list
+- Compact `/admin` dashboard for reviewing both registration types
 - Supplier and factory codes retained as stable identifiers
 - Responsive layout for mobile, tablet, laptop, and desktop
 - Accessible labels, keyboard-friendly controls, inline validation, and status messages
@@ -60,6 +61,8 @@ window.SUPABASE_CONFIG = {
 ```
 
 5. Serve the site and submit a test registration. Supplier rows appear in `registrations`; packaging supplier rows appear in `packaging_registrations`.
+
+The admin login is available at `/admin/` and redirects authenticated users to `/admin-dashboard/`. Its initial password is `event_admin`. Login creates a revocable 30-day browser session, and the dashboard provides search, edit, delete, refresh, logout, and password-change controls. Direct browser table reads remain blocked by Row Level Security.
 
 The publishable key is intended for public browser use when Row Level Security is enabled. Never place a secret key or legacy service-role key in this project. The included grants and policies permit anonymous inserts only; public visitors cannot read registration records. The schema script is safe to run again if the tables, policies, and indexes already exist. A legacy `anon` key also works, but new projects should use the publishable key.
 
