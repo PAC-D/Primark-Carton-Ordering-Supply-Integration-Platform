@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CartonConnect administration login.">
+  <title>Admin Login | CartonConnect</title>
+  <link rel="icon" href="../assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../" aria-label="CartonConnect registration"><img class="pacd-logo" src="../assets/pacd.png" alt="PACD"></a>
+      <div class="title-block"><p class="eyebrow">Administration</p><h1>CartonConnect</h1></div>
+      <img class="primark-logo" src="../assets/primark-logo.png" alt="Primark">
+    </div>
+  </header>
+  <main class="login-main">
+    <form id="admin-login-form" class="login-card" novalidate>
+      <p class="step-label">Admin access</p>
+      <h2>Sign in</h2>
+      <div class="field">
+        <label for="admin-password">Password</label>
+        <div class="password-control">
+          <input id="admin-password" type="password" autocomplete="current-password" required autofocus>
+          <button id="toggle-password" type="button" aria-label="Show password" aria-pressed="false">
+            <svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+            <svg class="eye-closed is-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 3 18 18M10.6 6.1c.5-.1.9-.1 1.4-.1 6 0 9.5 6 9.5 6a16 16 0 0 1-2.1 2.7M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.5 6 9.5 6c1.5 0 2.8-.4 4-1"/><path d="M9.8 9.8A3.1 3.1 0 0 0 14.2 14.2"/></svg>
+          </button>
+        </div>
+        <p id="login-error" class="field-error" role="alert"></p>
+      </div>
+      <button class="submit-button" type="submit"><span>Sign in</span></button>
+    </form>
+  </main>
+  <script src="../supabase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
