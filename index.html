@@ -3,30 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Register for the Primark Carton Ordering & Supply Integration Platform.">
-  <title>Registration | Primark Carton Ordering & Supply Integration Platform</title>
+  <meta name="description" content="Register for CartonConnect.">
+  <title>Registration | CartonConnect</title>
   <link rel="icon" href="assets/favicon.png" type="image/png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <dialog id="registration-type-dialog" class="type-dialog" aria-labelledby="type-dialog-title">
+    <div class="type-dialog-brand">
+      <img src="assets/pacd.png" alt="PACD">
+      <span aria-hidden="true"></span>
+      <img src="assets/primark-logo.png" alt="Primark">
+    </div>
+    <div class="type-dialog-heading">
+      <h2 id="type-dialog-title">How would you like to register?</h2>
+    </div>
+    <div class="type-options">
+      <button id="choose-supplier" class="type-option" type="button">
+        <span class="type-option-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 21V7l8-4 8 4v14M8 21v-4h8v4M8 9h2m4 0h2m-8 4h2m4 0h2"/></svg>
+        </span>
+        <span><strong>Register as Supplier</strong><small>Select your supplier and assigned factories.</small></span>
+        <svg class="type-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m13.5 5 7 7-7 7-1.4-1.4 4.6-4.6H3v-2h13.7l-4.6-4.6L13.5 5Z"/></svg>
+      </button>
+      <button id="choose-packaging" class="type-option" type="button">
+        <span class="type-option-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="m4 7 8-4 8 4-8 4-8-4Zm0 0v10l8 4 8-4V7m-8 4v10"/></svg>
+        </span>
+        <span><strong>Register as Packaging Supplier</strong><small>Select a packaging supplier and enter your details.</small></span>
+        <svg class="type-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m13.5 5 7 7-7 7-1.4-1.4 4.6-4.6H3v-2h13.7l-4.6-4.6L13.5 5Z"/></svg>
+      </button>
+    </div>
+  </dialog>
+
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="./" aria-label="PACD home">
+      <a class="brand" href="./" aria-label="CartonConnect home">
         <img class="pacd-logo" src="assets/pacd.png" alt="PACD">
       </a>
       <div class="title-block">
         <p class="eyebrow">Supplier onboarding</p>
-        <h1>Primark Carton Ordering &amp; Supply Integration Platform</h1>
+        <h1>CartonConnect</h1>
       </div>
       <img class="primark-logo" src="assets/primark-logo.png" alt="Primark">
     </div>
   </header>
 
+  <button class="change-type-button page-type-switch" type="button" data-open-type-dialog>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h11l-3-3m3 3-3 3M16 17H5l3 3m-3-3 3-3"/></svg>
+    <span>Change registration type</span>
+  </button>
+
   <main>
     <section class="intro" aria-labelledby="registration-heading">
       <div>
-        <p class="step-label">Account registration</p>
-        <h2 id="registration-heading">Create your access request</h2>
+        <p class="step-label" id="page-step-label">Supplier registration</p>
+        <h2 id="registration-heading">Create your supplier access request</h2>
       </div>
     </section>
 
@@ -97,10 +129,60 @@
       </button>
       <p class="privacy-note">By submitting, you confirm that the information provided is accurate.</p>
     </form>
+
+    <form id="packaging-registration-form" class="registration-card" novalidate hidden>
+      <div class="form-heading">
+        <div class="form-icon package-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="m4 7 8-4 8 4-8 4-8-4Zm0 0v10l8 4 8-4V7m-8 4v10"/></svg>
+        </div>
+        <div>
+          <h3>Packaging supplier registration</h3>
+          <p>All fields are required.</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field field-full">
+          <label for="packaging-supplier">Packaging Supplier <span aria-hidden="true">*</span></label>
+          <select id="packaging-supplier" name="packaging_supplier" required>
+            <option value="">Select a packaging supplier</option>
+            <option value="Epyllion Ltd.">Epyllion Ltd.</option>
+            <option value="MR Box">MR Box</option>
+            <option value="Reflex Packaging Ltd.">Reflex Packaging Ltd.</option>
+            <option value="Uniglory Packaging Industries Ltd.">Uniglory Packaging Industries Ltd.</option>
+            <option value="Union Label &amp; Accessories Ltd.">Union Label &amp; Accessories Ltd.</option>
+            <option value="Youngshine Packtrims Ltd.">Youngshine Packtrims Ltd.</option>
+          </select>
+          <p class="field-error" id="packaging-supplier-error"></p>
+        </div>
+
+        <div class="divider field-full"><span>Your information</span></div>
+
+        <div class="field">
+          <label for="packaging-name">Name <span aria-hidden="true">*</span></label>
+          <input id="packaging-name" name="full_name" type="text" autocomplete="name" placeholder="Enter your full name" maxlength="120" required>
+          <p class="field-error" id="packaging-name-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="packaging-email">Email <span aria-hidden="true">*</span></label>
+          <input id="packaging-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@company.com" maxlength="254" required>
+          <p class="field-error" id="packaging-email-error"></p>
+        </div>
+      </div>
+
+      <div id="packaging-form-status" class="form-status" role="status" aria-live="polite" hidden></div>
+
+      <button class="submit-button" type="submit">
+        <span>Submit registration</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13.5 5 7 7-7 7-1.4-1.4 4.6-4.6H3v-2h13.7l-4.6-4.6L13.5 5Z"/></svg>
+      </button>
+      <p class="privacy-note">By submitting, you confirm that the information provided is accurate.</p>
+    </form>
   </main>
 
   <footer>
-    <p>&copy; <span id="year"></span> PACD. Primark Carton Ordering &amp; Supply Integration Platform.</p>
+    <p>&copy; <span id="year"></span> PACD. CartonConnect.</p>
     <p class="developer-credit">Developed by <a href="https://github.com/recursid" target="_blank" rel="noopener noreferrer">RecurSID</a></p>
   </footer>
 

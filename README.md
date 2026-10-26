@@ -1,11 +1,13 @@
-# Primark Carton Ordering & Supply Integration Platform
+# CartonConnect
 
-A responsive supplier registration portal based on the provided design reference. It uses the PACD and Primark assets in `assets/`, filters factories in the browser using the mappings from `factory-supplier pair.xlsx`, and submits only completed registrations to Supabase.
+A responsive supplier registration portal for CartonConnect. It uses the PACD and Primark assets in `assets/`, filters factories in the browser using the mappings from `factory-supplier pair.xlsx`, and submits only completed registrations to Supabase.
 
 ## What is included
 
 - Searchable supplier dropdown containing all 68 suppliers from the workbook
 - Supplier-dependent multi-select containing the assigned factories only
+- Required registration-type chooser for supplier or packaging supplier onboarding
+- Packaging supplier registration with a controlled single-select supplier list
 - Supplier and factory codes retained as stable identifiers
 - Responsive layout for mobile, tablet, laptop, and desktop
 - Accessible labels, keyboard-friendly controls, inline validation, and status messages
@@ -57,9 +59,9 @@ window.SUPABASE_CONFIG = {
 };
 ```
 
-5. Serve the site and submit a test registration. The row will appear in the `registrations` table.
+5. Serve the site and submit a test registration. Supplier rows appear in `registrations`; packaging supplier rows appear in `packaging_registrations`.
 
-The publishable key is intended for public browser use when Row Level Security is enabled. Never place a secret key or legacy service-role key in this project. The included grants and policy permit anonymous inserts only; public visitors cannot read registration records. The schema script is safe to run again if the table, policy, and index already exist. A legacy `anon` key also works, but new projects should use the publishable key.
+The publishable key is intended for public browser use when Row Level Security is enabled. Never place a secret key or legacy service-role key in this project. The included grants and policies permit anonymous inserts only; public visitors cannot read registration records. The schema script is safe to run again if the tables, policies, and indexes already exist. A legacy `anon` key also works, but new projects should use the publishable key.
 
 ## Update supplier and factory data
 

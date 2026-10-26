@@ -14,6 +14,15 @@
   const factoryCount = document.querySelector("#factory-count");
   const submitButton = form.querySelector(".submit-button");
   const status = document.querySelector("#form-status");
+  const packagingForm = document.querySelector("#packaging-registration-form");
+  const packagingSupplier = document.querySelector("#packaging-supplier");
+  const packagingName = document.querySelector("#packaging-name");
+  const packagingEmail = document.querySelector("#packaging-email");
+  const packagingStatus = document.querySelector("#packaging-form-status");
+  const packagingSubmitButton = packagingForm.querySelector(".submit-button");
+  const typeDialog = document.querySelector("#registration-type-dialog");
+  const pageStepLabel = document.querySelector("#page-step-label");
+  const registrationHeading = document.querySelector("#registration-heading");
 
   document.querySelector("#year").textContent = new Date().getFullYear();
 
@@ -232,7 +241,7 @@
     };
   }
 
-  async function saveRegistration(payload) {
+  async function saveRegistration(payload, table = "registrations") {
     const config = window.SUPABASE_CONFIG || {};
     const publishableKey = config.publishableKey || config.anonKey;
     if (!config.url || !publishableKey) {
@@ -240,7 +249,7 @@
       return { demo: true };
     }
 
-    const response = await fetch(`${config.url.replace(/\/$/, "")}/rest/v1/registrations`, {
+    const response = await fetch(`${config.url.replace(/\/$/, "")}/rest/v1/${table}`, {
       method: "POST",
       headers: {
         apikey: publishableKey,
@@ -269,6 +278,62 @@
     renderChips();
   }
 
+  function showTypeSelection() {
+    if (!typeDialog.open) typeDialog.showModal();
+  }
+
+  function selectRegistrationType(type) {
+    const packaging = type === "packaging";
+    form.hidden = packaging;
+    packagingForm.hidden = !packaging;
+    status.hidden = true;
+    status.className = "form-status";
+    packagingStatus.hidden = true;
+    packagingStatus.className = "form-status";
+    pageStepLabel.textContent = packaging ? "Packaging supplier registration" : "Supplier registration";
+    registrationHeading.textContent = packaging
+      ? "Create your packaging supplier access request"
+      : "Create your supplier access request";
+    typeDialog.close();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function showSuccess(target, message) {
+    const text = document.createElement("span");
+    text.textContent = message;
+    const returnButton = document.createElement("button");
+    returnButton.type = "button";
+    returnButton.className = "selection-return";
+    returnButton.textContent = "Choose another registration type";
+    returnButton.addEventListener("click", showTypeSelection);
+    target.replaceChildren(text, document.createElement("br"), returnButton);
+    target.className = "form-status success";
+    target.hidden = false;
+  }
+
+  function clearPackagingError(field) {
+    const input = field === "supplier" ? packagingSupplier : field === "name" ? packagingName : packagingEmail;
+    document.querySelector(`#packaging-${field}-error`).textContent = "";
+    input.classList.remove("has-error");
+    input.removeAttribute("aria-invalid");
+  }
+
+  function showPackagingError(field, message) {
+    const input = field === "supplier" ? packagingSupplier : field === "name" ? packagingName : packagingEmail;
+    document.querySelector(`#packaging-${field}-error`).textContent = message;
+    input.classList.add("has-error");
+    input.setAttribute("aria-invalid", "true");
+  }
+
+  function validatePackagingForm() {
+    ["supplier", "name", "email"].forEach(clearPackagingError);
+    let valid = true;
+    if (!packagingSupplier.value) { showPackagingError("supplier", "Please select a packaging supplier."); valid = false; }
+    if (packagingName.value.trim().length < 2) { showPackagingError("name", "Please enter your full name."); valid = false; }
+    if (!packagingEmail.value.trim() || !packagingEmail.checkValidity()) { showPackagingError("email", "Enter a valid email address."); valid = false; }
+    return valid;
+  }
+
   supplierInput.addEventListener("focus", () => { renderSuppliers(state.supplier ? "" : supplierInput.value); setPanel(supplierInput, supplierPanel, true); });
   supplierInput.addEventListener("input", () => {
     if (supplierInput.value !== state.supplier?.name) {
@@ -295,6 +360,16 @@
 
   document.querySelector("#full-name").addEventListener("input", () => clearError("name"));
   document.querySelector("#email").addEventListener("input", () => clearError("email"));
+  packagingSupplier.addEventListener("change", () => clearPackagingError("supplier"));
+  packagingName.addEventListener("input", () => clearPackagingError("name"));
+  packagingEmail.addEventListener("input", () => clearPackagingError("email"));
+
+  typeDialog.addEventListener("cancel", (event) => event.preventDefault());
+  document.querySelector("#choose-supplier").addEventListener("click", () => selectRegistrationType("supplier"));
+  document.querySelector("#choose-packaging").addEventListener("click", () => selectRegistrationType("packaging"));
+  document.querySelectorAll("[data-open-type-dialog]").forEach((button) => {
+    button.addEventListener("click", showTypeSelection);
+  });
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -309,12 +384,10 @@
     submitButton.querySelector("span").textContent = "Submitting…";
     try {
       const result = await saveRegistration(registrationPayload());
-      status.classList.add("success");
-      status.textContent = result.demo
+      showSuccess(status, result.demo
         ? "Registration validated in demo mode. Add your Supabase credentials to save submissions."
-        : "Thank you. Your registration has been submitted successfully.";
-      status.hidden = false;
-      if (!result.demo) resetForm();
+        : "Thank you. Your registration has been submitted successfully.");
+      resetForm();
     } catch (error) {
       status.classList.add("error");
       status.textContent = error.message || "Something went wrong. Please try again.";
@@ -325,5 +398,39 @@
     }
   });
 
+  packagingForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    packagingStatus.hidden = true;
+    packagingStatus.className = "form-status";
+    if (!validatePackagingForm()) {
+      packagingForm.querySelector("[aria-invalid='true']")?.focus();
+      return;
+    }
+
+    packagingSubmitButton.disabled = true;
+    packagingSubmitButton.querySelector("span").textContent = "Submitting…";
+    const payload = {
+      packaging_supplier: packagingSupplier.value,
+      full_name: packagingName.value.trim(),
+      email: packagingEmail.value.trim().toLocaleLowerCase()
+    };
+
+    try {
+      const result = await saveRegistration(payload, "packaging_registrations");
+      showSuccess(packagingStatus, result.demo
+        ? "Registration validated in demo mode. Add your Supabase credentials to save submissions."
+        : "Thank you. Your packaging supplier registration has been submitted successfully.");
+      packagingForm.reset();
+    } catch (error) {
+      packagingStatus.classList.add("error");
+      packagingStatus.textContent = error.message || "Something went wrong. Please try again.";
+      packagingStatus.hidden = false;
+    } finally {
+      packagingSubmitButton.disabled = false;
+      packagingSubmitButton.querySelector("span").textContent = "Submit registration";
+    }
+  });
+
   renderSuppliers();
+  showTypeSelection();
 })();
