@@ -77,3 +77,202 @@ $$;
 
 create unique index if not exists packaging_registrations_supplier_email_key
 on public.packaging_registrations (packaging_supplier, lower(email));
+
+-- Admin access. The initial password is event_admin and is stored only as a hash.
+create extension if not exists pgcrypto with schema extensions;
+
+create table if not exists public.admin_settings (
+  id smallint primary key check (id = 1),
+  password_hash text not null,
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists public.admin_sessions (
+  id uuid primary key default gen_random_uuid(),
+  token_hash bytea not null unique,
+  created_at timestamptz not null default now(),
+  expires_at timestamptz not null
+);
+
+alter table public.admin_settings enable row level security;
+alter table public.admin_sessions enable row level security;
+revoke all on table public.admin_settings from anon, authenticated;
+revoke all on table public.admin_sessions from anon, authenticated;
+
+insert into public.admin_settings (id, password_hash)
+values (1, extensions.crypt('event_admin', extensions.gen_salt('bf')))
+on conflict (id) do nothing;
+
+-- Drop the earlier password-per-request functions when upgrading this schema.
+drop function if exists public.get_admin_registrations(text);
+drop function if exists public.update_admin_registration(text, text, bigint, text, text, text, text, jsonb);
+drop function if exists public.delete_admin_registration(text, text, bigint);
+drop function if exists public.change_admin_password(text, text);
+drop function if exists public.admin_logout(text);
+drop function if exists public.admin_session_valid(text);
+drop function if exists public.admin_login(text);
+
+create function public.admin_login(p_password text)
+returns text
+language plpgsql
+security definer
+set search_path = public, extensions
+as $$
+declare
+  new_token text;
+begin
+  if not exists (
+    select 1 from public.admin_settings
+    where id = 1 and password_hash = crypt(p_password, password_hash)
+  ) then
+    raise exception 'Invalid admin password';
+  end if;
+
+  delete from public.admin_sessions where expires_at <= now();
+  new_token := encode(gen_random_bytes(32), 'hex');
+  insert into public.admin_sessions (token_hash, expires_at)
+  values (digest(new_token, 'sha256'), now() + interval '30 days');
+  return new_token;
+end;
+$$;
+
+create function public.admin_session_valid(p_token text)
+returns boolean
+language sql
+security definer
+set search_path = public, extensions
+as $$
+  select exists (
+    select 1 from public.admin_sessions
+    where token_hash = digest(p_token, 'sha256') and expires_at > now()
+  );
+$$;
+
+create function public.admin_logout(p_token text)
+returns boolean
+language plpgsql
+security definer
+set search_path = public, extensions
+as $$
+begin
+  delete from public.admin_sessions where token_hash = digest(p_token, 'sha256');
+  return true;
+end;
+$$;
+
+create function public.get_admin_registrations(p_token text)
+returns table (
+  record_id bigint,
+  registration_type text,
+  full_name text,
+  email text,
+  supplier_code text,
+  supplier_name text,
+  factories jsonb,
+  registered_at timestamptz
+)
+language plpgsql
+security definer
+set search_path = public, extensions
+as $$
+begin
+  if not public.admin_session_valid(p_token) then raise exception 'Unauthorized admin session'; end if;
+  return query
+  select combined.record_id, combined.registration_type, combined.full_name, combined.email,
+         combined.supplier_code, combined.supplier_name, combined.factories, combined.registered_at
+  from (
+    select r.id, 'Supplier'::text, r.full_name, r.email, r.supplier_code,
+           r.supplier_name, r.factories, r.created_at
+    from public.registrations r
+    union all
+    select p.id, 'Packaging supplier'::text, p.full_name, p.email, null::text,
+           p.packaging_supplier, '[]'::jsonb, p.created_at
+    from public.packaging_registrations p
+  ) as combined(record_id, registration_type, full_name, email, supplier_code, supplier_name, factories, registered_at)
+  order by combined.registered_at desc;
+end;
+$$;
+
+create function public.update_admin_registration(
+  p_token text, p_registration_type text, p_id bigint, p_full_name text, p_email text,
+  p_supplier_code text, p_supplier_name text, p_factories jsonb
+)
+returns boolean
+language plpgsql
+security definer
+set search_path = public, extensions
+as $$
+declare updated_count integer;
+begin
+  if not public.admin_session_valid(p_token) then raise exception 'Unauthorized admin session'; end if;
+  if char_length(trim(p_full_name)) < 2 or p_email is null or position('@' in p_email) < 2 then
+    raise exception 'A valid name and email are required';
+  end if;
+
+  if p_registration_type = 'Supplier' then
+    if p_supplier_code is null or p_supplier_name is null or jsonb_typeof(p_factories) <> 'array' or jsonb_array_length(p_factories) = 0 then
+      raise exception 'A supplier and at least one factory are required';
+    end if;
+    update public.registrations set full_name = trim(p_full_name), email = lower(trim(p_email)),
+      supplier_code = p_supplier_code, supplier_name = p_supplier_name, factories = p_factories where id = p_id;
+  elsif p_registration_type = 'Packaging supplier' then
+    update public.packaging_registrations set full_name = trim(p_full_name), email = lower(trim(p_email)),
+      packaging_supplier = p_supplier_name where id = p_id;
+  else
+    raise exception 'Invalid registration type';
+  end if;
+  get diagnostics updated_count = row_count;
+  return updated_count = 1;
+end;
+$$;
+
+create function public.delete_admin_registration(p_token text, p_registration_type text, p_id bigint)
+returns boolean
+language plpgsql
+security definer
+set search_path = public, extensions
+as $$
+declare deleted_count integer;
+begin
+  if not public.admin_session_valid(p_token) then raise exception 'Unauthorized admin session'; end if;
+  if p_registration_type = 'Supplier' then
+    delete from public.registrations where id = p_id;
+  elsif p_registration_type = 'Packaging supplier' then
+    delete from public.packaging_registrations where id = p_id;
+  else
+    raise exception 'Invalid registration type';
+  end if;
+  get diagnostics deleted_count = row_count;
+  return deleted_count = 1;
+end;
+$$;
+
+create function public.change_admin_password(p_token text, p_new_password text)
+returns boolean
+language plpgsql
+security definer
+set search_path = public, extensions
+as $$
+begin
+  if not public.admin_session_valid(p_token) then raise exception 'Unauthorized admin session'; end if;
+  if char_length(p_new_password) < 8 then raise exception 'The new password must contain at least 8 characters'; end if;
+  update public.admin_settings set password_hash = crypt(p_new_password, gen_salt('bf')), updated_at = now() where id = 1;
+  delete from public.admin_sessions where token_hash <> digest(p_token, 'sha256');
+  return true;
+end;
+$$;
+
+revoke all on function public.admin_login(text) from public;
+revoke all on function public.admin_session_valid(text) from public;
+revoke all on function public.admin_logout(text) from public;
+revoke all on function public.get_admin_registrations(text) from public;
+revoke all on function public.update_admin_registration(text, text, bigint, text, text, text, text, jsonb) from public;
+revoke all on function public.delete_admin_registration(text, text, bigint) from public;
+revoke all on function public.change_admin_password(text, text) from public;
+grant execute on function public.admin_login(text) to anon, authenticated;
+grant execute on function public.admin_session_valid(text) to anon, authenticated;
+grant execute on function public.admin_logout(text) to anon, authenticated;
+grant execute on function public.get_admin_registrations(text) to anon, authenticated;
+grant execute on function public.update_admin_registration(text, text, bigint, text, text, text, text, jsonb) to anon, authenticated;
+grant execute on function public.delete_admin_registration(text, text, bigint) to anon, authenticated;
+grant execute on function public.change_admin_password(text, text) to anon, authenticated;
