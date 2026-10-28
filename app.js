@@ -2,7 +2,13 @@
   "use strict";
 
   const suppliers = Array.isArray(window.SUPPLIER_FACTORY_DATA) ? window.SUPPLIER_FACTORY_DATA : [];
-  const state = { supplier: null, selectedFactories: new Map() };
+  const factoryIndex = new Map();
+  suppliers.forEach((supplier) => supplier.factories.forEach((factory) => {
+    if (!factoryIndex.has(factory.code)) factoryIndex.set(factory.code, { ...factory, suppliers: [] });
+    factoryIndex.get(factory.code).suppliers.push({ code: supplier.code, name: supplier.name });
+  }));
+  const factories = [...factoryIndex.values()].sort((a, b) => a.name.localeCompare(b.name));
+  const state = { supplier: null, selectedFactories: new Map(), registrationFactory: null, allocatedSupplier: null };
   const form = document.querySelector("#registration-form");
   const supplierInput = document.querySelector("#supplier-search");
   const supplierPanel = document.querySelector("#supplier-options");
@@ -14,6 +20,18 @@
   const factoryCount = document.querySelector("#factory-count");
   const submitButton = form.querySelector(".submit-button");
   const status = document.querySelector("#form-status");
+  const factoryForm = document.querySelector("#factory-registration-form");
+  const registrationFactoryInput = document.querySelector("#factory-registration-search");
+  const registrationFactoryPanel = document.querySelector("#factory-registration-options");
+  const clearRegistrationFactoryButton = document.querySelector("#clear-registration-factory");
+  const allocatedSupplierInput = document.querySelector("#allocated-supplier-search");
+  const allocatedSupplierPanel = document.querySelector("#allocated-supplier-options");
+  const allocatedSupplierControl = document.querySelector("#allocated-supplier-combobox");
+  const clearAllocatedSupplierButton = document.querySelector("#clear-allocated-supplier");
+  const factoryName = document.querySelector("#factory-name");
+  const factoryEmail = document.querySelector("#factory-email");
+  const factoryStatus = document.querySelector("#factory-form-status");
+  const factorySubmitButton = factoryForm.querySelector(".submit-button");
   const packagingForm = document.querySelector("#packaging-registration-form");
   const packagingSupplier = document.querySelector("#packaging-supplier");
   const packagingName = document.querySelector("#packaging-name");
@@ -32,6 +50,86 @@
   function setPanel(input, panel, open) {
     panel.hidden = !open;
     input.setAttribute("aria-expanded", String(open));
+  }
+
+  function renderSingleSelect(panel, items, query, selectedCode, emptyMessage, codeLabel, onSelect) {
+    panel.replaceChildren();
+    const matches = items.filter((item) => includesQuery(item, query));
+    if (!matches.length) {
+      const empty = document.createElement("div");
+      empty.className = "empty-option";
+      empty.textContent = emptyMessage;
+      panel.append(empty);
+      return;
+    }
+    matches.forEach((item) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "option";
+      button.role = "option";
+      button.setAttribute("aria-selected", String(selectedCode === item.code));
+      const text = document.createElement("span");
+      text.textContent = item.name;
+      const code = document.createElement("small");
+      code.textContent = `${codeLabel}: ${item.code}`;
+      text.append(code);
+      button.append(text);
+      button.addEventListener("click", () => onSelect(item));
+      panel.append(button);
+    });
+  }
+
+  function renderRegistrationFactories(query = "") {
+    renderSingleSelect(registrationFactoryPanel, factories, query, state.registrationFactory?.code,
+      "No factories found", "Factory code", selectRegistrationFactory);
+  }
+
+  function selectRegistrationFactory(factory) {
+    const changed = state.registrationFactory?.code !== factory.code;
+    state.registrationFactory = factory;
+    registrationFactoryInput.value = factory.name;
+    clearRegistrationFactoryButton.hidden = false;
+    setPanel(registrationFactoryInput, registrationFactoryPanel, false);
+    clearFactoryRegistrationError("registration");
+    if (changed) clearAllocatedSupplier(false);
+    allocatedSupplierInput.disabled = false;
+    allocatedSupplierInput.placeholder = "Search and select an allocated supplier";
+    allocatedSupplierControl.classList.remove("is-disabled");
+    renderAllocatedSuppliers();
+  }
+
+  function clearRegistrationFactory() {
+    state.registrationFactory = null;
+    registrationFactoryInput.value = "";
+    clearRegistrationFactoryButton.hidden = true;
+    setPanel(registrationFactoryInput, registrationFactoryPanel, false);
+    clearAllocatedSupplier(false);
+    allocatedSupplierInput.disabled = true;
+    allocatedSupplierInput.placeholder = "Select a factory first";
+    allocatedSupplierControl.classList.add("is-disabled");
+    registrationFactoryInput.focus();
+  }
+
+  function renderAllocatedSuppliers(query = "") {
+    const allocated = state.registrationFactory?.suppliers || [];
+    renderSingleSelect(allocatedSupplierPanel, allocated, query, state.allocatedSupplier?.code,
+      "No allocated suppliers found", "Supplier code", selectAllocatedSupplier);
+  }
+
+  function selectAllocatedSupplier(supplier) {
+    state.allocatedSupplier = supplier;
+    allocatedSupplierInput.value = supplier.name;
+    clearAllocatedSupplierButton.hidden = false;
+    setPanel(allocatedSupplierInput, allocatedSupplierPanel, false);
+    clearFactoryRegistrationError("supplier");
+  }
+
+  function clearAllocatedSupplier(focus = true) {
+    state.allocatedSupplier = null;
+    allocatedSupplierInput.value = "";
+    clearAllocatedSupplierButton.hidden = true;
+    setPanel(allocatedSupplierInput, allocatedSupplierPanel, false);
+    if (focus && !allocatedSupplierInput.disabled) allocatedSupplierInput.focus();
   }
 
   function renderSuppliers(query = "") {
@@ -233,11 +331,51 @@
 
   function registrationPayload() {
     return {
+      registration_type: "Supplier",
       supplier_code: state.supplier.code,
       supplier_name: state.supplier.name,
       factories: [...state.selectedFactories.values()].map(({ code, name }) => ({ code, name })),
       full_name: document.querySelector("#full-name").value.trim(),
       email: document.querySelector("#email").value.trim().toLocaleLowerCase()
+    };
+  }
+
+  function clearFactoryRegistrationError(field) {
+    const input = field === "registration" ? registrationFactoryInput
+      : field === "supplier" ? allocatedSupplierInput
+      : field === "name" ? factoryName : factoryEmail;
+    document.querySelector(`#${field === "registration" ? "factory-registration" : field === "supplier" ? "allocated-supplier" : `factory-${field}`}-error`).textContent = "";
+    (input.closest(".combo-control") || input).classList.remove("has-error");
+    input.removeAttribute("aria-invalid");
+  }
+
+  function showFactoryRegistrationError(field, message) {
+    const input = field === "registration" ? registrationFactoryInput
+      : field === "supplier" ? allocatedSupplierInput
+      : field === "name" ? factoryName : factoryEmail;
+    document.querySelector(`#${field === "registration" ? "factory-registration" : field === "supplier" ? "allocated-supplier" : `factory-${field}`}-error`).textContent = message;
+    (input.closest(".combo-control") || input).classList.add("has-error");
+    input.setAttribute("aria-invalid", "true");
+  }
+
+  function validateFactoryForm() {
+    ["registration", "supplier", "name", "email"].forEach(clearFactoryRegistrationError);
+    let valid = true;
+    if (!state.registrationFactory) { showFactoryRegistrationError("registration", "Please select a factory."); valid = false; }
+    if (!state.allocatedSupplier) { showFactoryRegistrationError("supplier", "Please select an allocated supplier."); valid = false; }
+    if (factoryName.value.trim().length < 2) { showFactoryRegistrationError("name", "Please enter your full name."); valid = false; }
+    if (!factoryEmail.value.trim() || !factoryEmail.checkValidity()) { showFactoryRegistrationError("email", "Enter a valid email address."); valid = false; }
+    return valid;
+  }
+
+  function factoryRegistrationPayload() {
+    return {
+      registration_type: "Factory",
+      supplier_code: state.allocatedSupplier.code,
+      supplier_name: state.allocatedSupplier.name,
+      factories: [{ code: state.registrationFactory.code, name: state.registrationFactory.name }],
+      full_name: factoryName.value.trim(),
+      email: factoryEmail.value.trim().toLocaleLowerCase()
     };
   }
 
@@ -278,22 +416,37 @@
     renderChips();
   }
 
+  function resetFactoryForm() {
+    factoryForm.reset();
+    state.registrationFactory = null;
+    state.allocatedSupplier = null;
+    clearRegistrationFactoryButton.hidden = true;
+    clearAllocatedSupplierButton.hidden = true;
+    allocatedSupplierInput.disabled = true;
+    allocatedSupplierInput.placeholder = "Select a factory first";
+    allocatedSupplierControl.classList.add("is-disabled");
+  }
+
   function showTypeSelection() {
     if (!typeDialog.open) typeDialog.showModal();
   }
 
   function selectRegistrationType(type) {
     const packaging = type === "packaging";
-    form.hidden = packaging;
+    const factory = type === "factory";
+    form.hidden = packaging || factory;
+    factoryForm.hidden = !factory;
     packagingForm.hidden = !packaging;
     status.hidden = true;
     status.className = "form-status";
     packagingStatus.hidden = true;
     packagingStatus.className = "form-status";
-    pageStepLabel.textContent = packaging ? "Packaging supplier registration" : "Supplier registration";
+    factoryStatus.hidden = true;
+    factoryStatus.className = "form-status";
+    pageStepLabel.textContent = packaging ? "Packaging supplier registration" : factory ? "Factory registration" : "Supplier registration";
     registrationHeading.textContent = packaging
       ? "Create your packaging supplier access request"
-      : "Create your supplier access request";
+      : factory ? "Create your factory access request" : "Create your supplier access request";
     typeDialog.close();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -353,9 +506,39 @@
   factoryInput.addEventListener("keydown", (event) => { if (event.key === "Escape") setPanel(factoryInput, factoryPanel, false); });
   factoryControl.addEventListener("click", (event) => event.stopPropagation());
 
+  registrationFactoryInput.addEventListener("focus", () => { renderRegistrationFactories(state.registrationFactory ? "" : registrationFactoryInput.value); setPanel(registrationFactoryInput, registrationFactoryPanel, true); });
+  registrationFactoryInput.addEventListener("input", () => {
+    if (registrationFactoryInput.value !== state.registrationFactory?.name) {
+      state.registrationFactory = null;
+      clearRegistrationFactoryButton.hidden = !registrationFactoryInput.value;
+      clearAllocatedSupplier(false);
+      allocatedSupplierInput.disabled = true;
+      allocatedSupplierInput.placeholder = "Select a factory first";
+      allocatedSupplierControl.classList.add("is-disabled");
+    }
+    renderRegistrationFactories(registrationFactoryInput.value);
+    setPanel(registrationFactoryInput, registrationFactoryPanel, true);
+  });
+  registrationFactoryInput.addEventListener("keydown", (event) => { if (event.key === "Escape") setPanel(registrationFactoryInput, registrationFactoryPanel, false); });
+  clearRegistrationFactoryButton.addEventListener("click", clearRegistrationFactory);
+
+  allocatedSupplierInput.addEventListener("focus", () => { if (state.registrationFactory) { renderAllocatedSuppliers(state.allocatedSupplier ? "" : allocatedSupplierInput.value); setPanel(allocatedSupplierInput, allocatedSupplierPanel, true); } });
+  allocatedSupplierInput.addEventListener("input", () => {
+    if (allocatedSupplierInput.value !== state.allocatedSupplier?.name) {
+      state.allocatedSupplier = null;
+      clearAllocatedSupplierButton.hidden = !allocatedSupplierInput.value;
+    }
+    renderAllocatedSuppliers(allocatedSupplierInput.value);
+    setPanel(allocatedSupplierInput, allocatedSupplierPanel, true);
+  });
+  allocatedSupplierInput.addEventListener("keydown", (event) => { if (event.key === "Escape") setPanel(allocatedSupplierInput, allocatedSupplierPanel, false); });
+  clearAllocatedSupplierButton.addEventListener("click", () => clearAllocatedSupplier());
+
   document.addEventListener("click", (event) => {
     if (!event.target.closest("#supplier-combobox")) setPanel(supplierInput, supplierPanel, false);
     if (!event.target.closest("#factory-multiselect")) setPanel(factoryInput, factoryPanel, false);
+    if (!event.target.closest("#factory-registration-combobox")) setPanel(registrationFactoryInput, registrationFactoryPanel, false);
+    if (!event.target.closest("#allocated-supplier-combobox")) setPanel(allocatedSupplierInput, allocatedSupplierPanel, false);
   });
 
   document.querySelector("#full-name").addEventListener("input", () => clearError("name"));
@@ -363,9 +546,12 @@
   packagingSupplier.addEventListener("change", () => clearPackagingError("supplier"));
   packagingName.addEventListener("input", () => clearPackagingError("name"));
   packagingEmail.addEventListener("input", () => clearPackagingError("email"));
+  factoryName.addEventListener("input", () => clearFactoryRegistrationError("name"));
+  factoryEmail.addEventListener("input", () => clearFactoryRegistrationError("email"));
 
   typeDialog.addEventListener("cancel", (event) => event.preventDefault());
   document.querySelector("#choose-supplier").addEventListener("click", () => selectRegistrationType("supplier"));
+  document.querySelector("#choose-factory").addEventListener("click", () => selectRegistrationType("factory"));
   document.querySelector("#choose-packaging").addEventListener("click", () => selectRegistrationType("packaging"));
   document.querySelectorAll("[data-open-type-dialog]").forEach((button) => {
     button.addEventListener("click", showTypeSelection);
@@ -395,6 +581,33 @@
     } finally {
       submitButton.disabled = false;
       submitButton.querySelector("span").textContent = "Submit registration";
+    }
+  });
+
+  factoryForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    factoryStatus.hidden = true;
+    factoryStatus.className = "form-status";
+    if (!validateFactoryForm()) {
+      factoryForm.querySelector("[aria-invalid='true']")?.focus();
+      return;
+    }
+
+    factorySubmitButton.disabled = true;
+    factorySubmitButton.querySelector("span").textContent = "Submitting…";
+    try {
+      const result = await saveRegistration(factoryRegistrationPayload());
+      showSuccess(factoryStatus, result.demo
+        ? "Registration validated in demo mode. Add your Supabase credentials to save submissions."
+        : "Thank you. Your factory registration has been submitted successfully.");
+      resetFactoryForm();
+    } catch (error) {
+      factoryStatus.classList.add("error");
+      factoryStatus.textContent = error.message || "Something went wrong. Please try again.";
+      factoryStatus.hidden = false;
+    } finally {
+      factorySubmitButton.disabled = false;
+      factorySubmitButton.querySelector("span").textContent = "Submit registration";
     }
   });
 

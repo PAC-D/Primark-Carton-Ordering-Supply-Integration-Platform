@@ -71,6 +71,7 @@
     tableBody.replaceChildren();
     document.querySelector("#total-count").textContent = registrations.length;
     document.querySelector("#supplier-count").textContent = registrations.filter((item) => item.registration_type === "Supplier").length;
+    document.querySelector("#factory-registration-count").textContent = registrations.filter((item) => item.registration_type === "Factory").length;
     document.querySelector("#packaging-count").textContent = registrations.filter((item) => item.registration_type === "Packaging supplier").length;
 
     visible.forEach((registration) => {
@@ -259,11 +260,11 @@
     document.querySelector("#edit-name").value = registration.full_name;
     document.querySelector("#edit-email").value = registration.email;
     document.querySelector("#edit-status").textContent = "";
-    const isSupplier = registration.registration_type === "Supplier";
-    document.querySelector("#supplier-edit-fields").hidden = !isSupplier;
-    document.querySelector("#packaging-edit-fields").hidden = isSupplier;
+    const hasSupplierAndFactory = registration.registration_type === "Supplier" || registration.registration_type === "Factory";
+    document.querySelector("#supplier-edit-fields").hidden = !hasSupplierAndFactory;
+    document.querySelector("#packaging-edit-fields").hidden = hasSupplierAndFactory;
 
-    if (isSupplier) {
+    if (hasSupplierAndFactory) {
       const supplier = suppliers.find((item) => item.code === registration.supplier_code);
       editFactories.clear();
       (registration.factories || []).forEach((factory) => editFactories.set(factory.code, factory));
@@ -320,10 +321,14 @@
     let supplierCode = null;
     let supplierName = document.querySelector("#edit-packaging-supplier").value;
     let factories = [];
-    if (type === "Supplier") {
+    if (type === "Supplier" || type === "Factory") {
       factories = [...editFactories.values()];
       if (!editSupplier || !factories.length) {
         status.textContent = "Select a supplier and at least one factory.";
+        return;
+      }
+      if (type === "Factory" && factories.length !== 1) {
+        status.textContent = "A factory registration must have exactly one factory.";
         return;
       }
       supplierCode = editSupplier.code;

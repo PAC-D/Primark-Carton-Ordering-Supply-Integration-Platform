@@ -26,6 +26,13 @@
         <span><strong>Register as Supplier</strong><small>Select your supplier and assigned factories.</small></span>
         <svg class="type-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m13.5 5 7 7-7 7-1.4-1.4 4.6-4.6H3v-2h13.7l-4.6-4.6L13.5 5Z"/></svg>
       </button>
+      <button id="choose-factory" class="type-option" type="button">
+        <span class="type-option-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 21V9l6 3V9l6 3V4h6v17M3 21h18M7 17h2m4 0h2m4 0h2"/></svg>
+        </span>
+        <span><strong>Register as Factory</strong><small>Select your factory and an allocated supplier.</small></span>
+        <svg class="type-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="m13.5 5 7 7-7 7-1.4-1.4 4.6-4.6H3v-2h13.7l-4.6-4.6L13.5 5Z"/></svg>
+      </button>
       <button id="choose-packaging" class="type-option" type="button">
         <span class="type-option-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="m4 7 8-4 8 4-8 4-8-4Zm0 0v10l8 4 8-4V7m-8 4v10"/></svg>
@@ -122,6 +129,71 @@
       </div>
 
       <div id="form-status" class="form-status" role="status" aria-live="polite" hidden></div>
+
+      <button class="submit-button" type="submit">
+        <span>Submit registration</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13.5 5 7 7-7 7-1.4-1.4 4.6-4.6H3v-2h13.7l-4.6-4.6L13.5 5Z"/></svg>
+      </button>
+      <p class="privacy-note">By submitting, you confirm that the information provided is accurate.</p>
+    </form>
+
+    <form id="factory-registration-form" class="registration-card" novalidate hidden>
+      <div class="form-heading">
+        <div class="form-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 21V9l6 3V9l6 3V4h6v17M3 21h18M7 17h2m4 0h2m4 0h2"/></svg>
+        </div>
+        <div>
+          <h3>Factory registration</h3>
+          <p>All fields are required.</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field field-full">
+          <label for="factory-registration-search">Factory Name <span aria-hidden="true">*</span></label>
+          <div class="combobox" id="factory-registration-combobox">
+            <div class="combo-control">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 20-4.4-4.4a8 8 0 1 0-1.4 1.4l4.4 4.4L21 20ZM5 11a6 6 0 1 1 12 0 6 6 0 0 1-12 0Z"/></svg>
+              <input id="factory-registration-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="factory-registration-options" placeholder="Search and select a factory" autocomplete="off" required>
+              <button class="clear-button" id="clear-registration-factory" type="button" aria-label="Clear factory" hidden>&times;</button>
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9.5 5 5 5-5 1.5 1.5-6.5 6.5L5.5 11 7 9.5Z"/></svg>
+            </div>
+            <div id="factory-registration-options" class="options-panel" role="listbox" hidden></div>
+          </div>
+          <p class="field-error" id="factory-registration-error"></p>
+        </div>
+
+        <div class="field field-full">
+          <label for="allocated-supplier-search">Allocated Supplier <span aria-hidden="true">*</span></label>
+          <p class="field-note">Only suppliers allocated to the selected factory are available.</p>
+          <div class="combobox is-disabled" id="allocated-supplier-combobox">
+            <div class="combo-control">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 20-4.4-4.4a8 8 0 1 0-1.4 1.4l4.4 4.4L21 20ZM5 11a6 6 0 1 1 12 0 6 6 0 0 1-12 0Z"/></svg>
+              <input id="allocated-supplier-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="allocated-supplier-options" placeholder="Select a factory first" autocomplete="off" disabled required>
+              <button class="clear-button" id="clear-allocated-supplier" type="button" aria-label="Clear allocated supplier" hidden>&times;</button>
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9.5 5 5 5-5 1.5 1.5-6.5 6.5L5.5 11 7 9.5Z"/></svg>
+            </div>
+            <div id="allocated-supplier-options" class="options-panel" role="listbox" hidden></div>
+          </div>
+          <p class="field-error" id="allocated-supplier-error"></p>
+        </div>
+
+        <div class="divider field-full"><span>Your information</span></div>
+
+        <div class="field">
+          <label for="factory-name">Name <span aria-hidden="true">*</span></label>
+          <input id="factory-name" name="full_name" type="text" autocomplete="name" placeholder="Enter your full name" maxlength="120" required>
+          <p class="field-error" id="factory-name-error"></p>
+        </div>
+
+        <div class="field">
+          <label for="factory-email">Email <span aria-hidden="true">*</span></label>
+          <input id="factory-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@company.com" maxlength="254" required>
+          <p class="field-error" id="factory-email-error"></p>
+        </div>
+      </div>
+
+      <div id="factory-form-status" class="form-status" role="status" aria-live="polite" hidden></div>
 
       <button class="submit-button" type="submit">
         <span>Submit registration</span>

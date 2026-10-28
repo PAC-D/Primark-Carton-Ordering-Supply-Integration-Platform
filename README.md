@@ -6,9 +6,10 @@ A responsive supplier registration portal for CartonConnect. It uses the PACD an
 
 - Searchable supplier dropdown containing all 68 suppliers from the workbook
 - Supplier-dependent multi-select containing the assigned factories only
-- Required registration-type chooser for supplier or packaging supplier onboarding
+- Required registration-type chooser for supplier, factory, or packaging supplier onboarding
+- Factory-first registration with a supplier list restricted to that factory's allocations
 - Packaging supplier registration with a controlled single-select supplier list
-- Compact `/admin` dashboard for reviewing both registration types
+- Compact `/admin` dashboard for reviewing all three registration types
 - Supplier and factory codes retained as stable identifiers
 - Responsive layout for mobile, tablet, laptop, and desktop
 - Accessible labels, keyboard-friendly controls, inline validation, and status messages
@@ -60,7 +61,7 @@ window.SUPABASE_CONFIG = {
 };
 ```
 
-5. Serve the site and submit a test registration. Supplier rows appear in `registrations`; packaging supplier rows appear in `packaging_registrations`.
+5. Serve the site and submit a test registration. Supplier and factory rows appear in `registrations`; packaging supplier rows appear in `packaging_registrations`.
 
 The admin login is available at `/admin/` and redirects authenticated users to `/admin-dashboard/`. Its initial password is `event_admin`. Login creates a revocable 30-day browser session, and the dashboard provides search, edit, delete, refresh, logout, and password-change controls. Direct browser table reads remain blocked by Row Level Security.
 
@@ -89,11 +90,12 @@ The generator reads the XLSX file directly, groups rows by supplier code, dedupl
 
 ```text
 Workbook → generated browser mapping → supplier selection → filtered factories
+                                    └→ factory selection → allocated suppliers
                                                         ↓
                                   completed registration → Supabase
 ```
 
-The supplier/factory mapping is static in the browser, so changing selections creates no Supabase traffic. On submission, the record stores the supplier code and name, the selected factory code/name pairs, the user's name, and email.
+The supplier/factory mapping is static in the browser, so changing selections creates no Supabase traffic. On submission, the record stores the registration type, supplier code and name, the selected factory code/name pairs, the user's name, and email.
 
 ## Deployment
 
