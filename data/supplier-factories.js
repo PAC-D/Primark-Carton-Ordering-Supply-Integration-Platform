@@ -122,7 +122,7 @@ window.SUPPLIER_FACTORY_DATA = [
                           },
                           {
                               "code":  "22846",
-                              "name":  "Mohammadi Group Limited"
+                              "name":  "MG Niche Flair Limited Unit 2"
                           },
                           {
                               "code":  "26764",
@@ -506,7 +506,7 @@ window.SUPPLIER_FACTORY_DATA = [
         "factories":  [
                           {
                               "code":  "22846",
-                              "name":  "Mohammadi Group Limited"
+                              "name":  "MG Niche Flair Limited Unit 2"
                           }
                       ]
     },
@@ -1022,7 +1022,7 @@ window.SUPPLIER_FACTORY_DATA = [
                           },
                           {
                               "code":  "22846",
-                              "name":  "Mohammadi Group Limited"
+                              "name":  "MG Niche Flair Limited Unit 2"
                           },
                           {
                               "code":  "27798",
