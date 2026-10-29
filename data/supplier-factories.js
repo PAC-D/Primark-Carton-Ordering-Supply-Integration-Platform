@@ -162,7 +162,7 @@ window.SUPPLIER_FACTORY_DATA = [
                           },
                           {
                               "code":  "24448",
-                              "name":  "Comfit Composite Knit Ltd PKA Comfit Lingerie Limi"
+                              "name":  "Comfit Composite Knit Ltd PKA Comfit Lingerie Limited"
                           },
                           {
                               "code":  "26150",
@@ -232,7 +232,7 @@ window.SUPPLIER_FACTORY_DATA = [
                           },
                           {
                               "code":  "11584",
-                              "name":  "Far East Knitting \u0026 Dyeing Industries Ltd PJT (115"
+                              "name":  "Far East Knitting \u0026 Dyeing Industries Ltd PJT"
                           },
                           {
                               "code":  "17443",
@@ -434,7 +434,7 @@ window.SUPPLIER_FACTORY_DATA = [
     },
     {
         "code":  "80734",
-        "name":  "KAIXI FASHION (HK) CO.LTD",
+        "name":  "KAIXI FASHION (HK) CO. LTD",
         "factories":  [
                           {
                               "code":  "26163",
@@ -616,7 +616,7 @@ window.SUPPLIER_FACTORY_DATA = [
                           },
                           {
                               "code":  "18234",
-                              "name":  "Saturn Textile Limited"
+                              "name":  "Saturn Textiles Limited"
                           },
                           {
                               "code":  "27035",
@@ -860,7 +860,7 @@ window.SUPPLIER_FACTORY_DATA = [
     },
     {
         "code":  "80306",
-        "name":  "SIMPLE APPROACH LIMTED",
+        "name":  "SIMPLE APPROACH LIMITED",
         "factories":  [
                           {
                               "code":  "11121",
@@ -942,7 +942,7 @@ window.SUPPLIER_FACTORY_DATA = [
         "factories":  [
                           {
                               "code":  "20331",
-                              "name":  "Alim Knit Ltd"
+                              "name":  "Alim Knit (BD) Ltd"
                           },
                           {
                               "code":  "25042",
@@ -1102,7 +1102,7 @@ window.SUPPLIER_FACTORY_DATA = [
         "factories":  [
                           {
                               "code":  "22775",
-                              "name":  "Dhaka Garments \u0026 Washing Ltd PKA HAMS Washing \u0026 Dy"
+                              "name":  "Dhaka Garments \u0026 Washing Ltd"
                           }
                       ]
     },
